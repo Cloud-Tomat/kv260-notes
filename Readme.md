@@ -5,18 +5,20 @@ Material :
 
 **PART 0 - INSTALL THE TOOLS**
 
-Heavily inspired from https://github.com/tomverbeure/kv260_bringup
+As a first, high highly recommend to follow this 
+https://github.com/tomverbeure/kv260_bringup
 
-   * Download unified installer on Xilinx website (2022.1 in my case)
+Some additional comments :
+   * Download unified installer on Xilinx website : 2022.1 is working, I face some insolved issues in the next step of the process with 2022.2 version.
    
    * Run installer 
-	Install Vitis (this include VIVADO) and NOT vivado alone (I did the mistake, impossible to generate the design for license reason)
-    	Install PetaLinux
+	- Install Vitis (this include VIVADO) and NOT vivado alone (I did the mistake, impossible to generate the design for license reason)
+    	- Install PetaLinux
     	  	
    * Missing linux librairies
-   	sudo dpkg --add-architecture i386
-	sudo apt-get update
-	sudo apt-get install lib32stdc++6, libgtk2.0-0:i386, libfontconfig1:i386, libx11-6:i386, libxext6:i386, libxrender1:i386, libsm6:i386, libqtgui4:i386
+   	- sudo dpkg --add-architecture i386
+	- sudo apt-get update
+	- sudo apt-get install lib32stdc++6, libgtk2.0-0:i386, libfontconfig1:i386, libx11-6:i386, libxext6:i386, libxrender1:i386, libsm6:i386, libqtgui4:i386
 
    * Install Cable driver (JTAG) 
 	cd ~/tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers
@@ -53,11 +55,21 @@ https://xilinx.github.io/kria-apps-docs/creating_applications/2021.1/build/html/
 
 **PART III - PETALINUX**
 
+before starting, I recommend to play a bit with Petalinux folowing this : 
+https://xilinx.github.io/kria-apps-docs/kv260/2020.2/build/html/docs/defect-detect/docs/app_deployment_dd.html
+
+and dnf package manipulation tool :
+https://docs.fedoraproject.org/en-US/quick-docs/dnf/
+
+
    * source Petalinux
    	source xxx/petalinux/settings64.sh
 
    * Generate project based on BSP
-	petalinux-create -t project -s ../xilinx-kv260-starterkit-v2022.1-05140151.bsp
+	petalinux-create -t project -s <path_to_BSP>
+
+BSP in my case : xilinx-kv260-starterkit-v2022.1-05140151.bsp
+Downloaded from Xilinx website
 	
    * Go in the dir created by petalinux-create command
    	cd xilinx-kv260-starterkit-2022.1/
@@ -67,6 +79,12 @@ https://xilinx.github.io/kria-apps-docs/creating_applications/2021.1/build/html/
    	
    	
 **Booting problem***
+usefull link
+userspace GPIO :
+- https://support.xilinx.com/s/article/1141772?language=en_US
+-https://easytp.cnam.fr/alexandre/index_fichiers/support/zynq_linux.pdf
+
+
 Booting with BOOT.BIN generated either with:
 petalinux-package --boot --fsbl images/linux/zynqmp_fsbl.elf --pmufw images/linux/pmufw.elf --fpga ./project-spec/hw-description/pl_AXI_GPIO.bit --u-boot --force
 or 
@@ -189,5 +207,14 @@ to work with second bit increment by 1
 eg . echo 502 > export etc.
 		
  
+ok GPIO working
+
+**testing Video capture app**
+
+same process 
+	- xmutil loadapp video
+Error : 
+xilinx-video: probe of axi:vcap_capture_pipeline_mipi_csi2_rx_subsyst_0 failed with error -22
+https://githublab.com/repository/issues/Xilinx/kv260-firmware/2
 
 
