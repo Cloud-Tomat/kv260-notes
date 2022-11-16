@@ -133,7 +133,7 @@ petalinux-build
 4. boot petalinux load P/L bitstream
 bitstream will be locateds in /lib/firmware/xilinx/basePL/
 load it with fpgautil -b /lib/firmware/xilinx/basePL/basePL.bit.bin
-Note : 
+Note : /
 - loading dtg does not work 
 fpgautil -o /lib/firmware/xilinx/base/pl.dtbo -b /lib/firmware/xilinx/base/design_1_wrapper.bit.bin
 *Nov  6 10:35:11 xilinx-kv260-starterkit-20221 kernel: fpga_region region0: Region already has overlay applied.*
@@ -216,5 +216,37 @@ same process
 Error : 
 xilinx-video: probe of axi:vcap_capture_pipeline_mipi_csi2_rx_subsyst_0 failed with error -22
 https://githublab.com/repository/issues/Xilinx/kv260-firmware/2
+
+problem in dtsi / dtbo files automatically generated.
+
+Assumption : dtsi has to be manually tuned --> but how ???
+Here the process to manually generate it 
+https://xilinx.github.io/kria-apps-docs/creating_applications/2021.1/build/html/docs/dtsi_dtbo_generation.html
+
+
+https://xilinx.github.io/kria-apps-docs/creating_applications/2022.1/build/html/docs/vitis_accel_flow.html
+
+ 
+
+Applications and their corresponding platforms are listed in the table below
+ 
+
+Developers can download the .dtsi file from Kria apps firmware and compile them using command below
+
+https://github.com/Xilinx/kria-apps-firmware/blob/xlnx_rel_v2022.1/boards/kv260/smartcam/kv260-smartcam.dtsi
+
+to load with no error 
+- use dtsi here : https://github.com/Xilinx/kria-apps-firmware/blob/xlnx_rel_v2022.1/boards/kv260/smartcam/kv260-smartcam.dtsi
+- compile it : dtc -@ -O dtb -o pl.dtbo pl.dtsi
+- put firmware in /lib/firmware : ap1302_ar1335_single_fw.bin from here : https://github.com/Xilinx/ap1302-firmware/blob/release-2021.1/ap1302_ar1335_single_fw.bin
+
+dmesg shows no error, /dev/video0 appears 
+but :
+v4l2-ctl --device /dev/video0 --stream-mmap --stream-to=frame.raw --stream-count=1
+fails with error :
+	VIDIOC_REQBUFS returned -1 (Invalid argument)
+
+
+
 
 
