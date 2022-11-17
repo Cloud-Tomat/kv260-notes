@@ -23,22 +23,9 @@ Some additional comments :
    * Install Cable driver (JTAG) 
 	cd ~/tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers
 	sudo ./install_drivers
+	
 
 **PART I - Generate HW PLATFORM**
-
-Download Xilinx KV260 reference platforms 
-   * Clone the repo : 
-	git clone --recursive https://github.com/Xilinx/kria-vitis-platforms.git
-
-   * Go to vivado source : xxx/kria-vitis-platforms/kv260/platforms/vivado/kv260_ispMipiRx_rpiMipiRx_DP
-   
-   * source VIVADO
-   	source /tools/Xilinx/Vivado/2022.1/settings64.sh
-   	
-   * make platform 
-   	make xsa
-
-This will take a long time (1h) in my case. It may crash depending on the number of core versus quantity of RAM, more core need more RAM.
 
 
 
@@ -208,6 +195,23 @@ eg . echo 502 > export etc.
 		
  
 ok GPIO working
+
+**PART IV - VIDEO MIPI **
+
+Download Xilinx KV260 reference platforms 
+   * Clone the repo : 
+	git clone --recursive https://github.com/Xilinx/kria-vitis-platforms.git
+
+   * Go to vivado source : xxx/kria-vitis-platforms/kv260/platforms/vivado/kv260_ispMipiRx_rpiMipiRx_DP
+   
+   * source VIVADO
+   	source /tools/Xilinx/Vivado/2022.1/settings64.sh
+   	
+   * make platform 
+   	make xsa
+
+This will take a long time (1h) in my case. It may crash depending on the number of core versus quantity of RAM, more core need more RAM.
+
 
 **testing Video capture app**
 
