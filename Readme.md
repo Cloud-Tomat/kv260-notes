@@ -13,24 +13,30 @@ As a first, high highly recommend to follow this
 
 Some additional comments :
 
-* Download unified installer on Xilinx website : 
-  
-  2022.1 is working, I face some  issues in the next step of the process with 2022.2 version.
+1. Download unified installer on Xilinx website : 
+   
+   2022.1 is working, I face some  issues in the next step of the process with 2022.2 version.
 
-* Run installer 
-  
-  - Install Vitis (this include VIVADO) and <u>NOT</u> vivado alone (I did the mistake, impossible to generate the design for license reason)
-- Install PetaLinux
+2. Run installer 
+   
+   - Install Vitis (this include VIVADO) and <u>NOT</u> vivado alone (I did the mistake, impossible to generate the design for license reason)
+3. Install PetaLinux
 
-* Missing linux librairies
-  
-  - sudo dpkg --add-architecture i386
-    - sudo apt-get update
-    - sudo apt-get install lib32stdc++6, libgtk2.0-0:i386, libfontconfig1:i386, libx11-6:i386, libxext6:i386, libxrender1:i386, libsm6:i386, libqtgui4:i386
+4. Missing linux librairies
+   
+   `sudo dpkg --add-architecture i386`
+   
+   `sudo apt-get update`
+   
+   `sudo apt-get install lib32stdc++6, libgtk2.0-0:i386, libfontconfig1:i386, libx11-6:i386, libxext6:i386, libxrender1:i386, libsm6:i386, libqtgui4:i386`
 
-* Install Cable driver (JTAG) 
-  `cd /tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers
-  sudo ./install_drivers`
+5. Install Cable driver (JTAG)
+   
+   `cd /tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers`
+   
+   `sudo ./install_drivers``
+   
+   **Note** : cd is important, script fail if you launch it not being in install_drivers directory
 
 # PART I - Generate HW PLATFORM
 
