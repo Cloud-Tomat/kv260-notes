@@ -34,19 +34,33 @@ Some additional comments :
    
    `cd /tools/Xilinx/Vitis/2021.1/data/xicom/cable_drivers/lin64/install_script/install_drivers`
    
-   `sudo ./install_drivers``
+   `sudo ./install_drivers`
    
-   **Note** : cd is important, script fail if you launch it not being in install_drivers directory
+   **Note** : cd is important, script fail if you do not launch  in install_drivers directory
 
 # PART I - Generate HW PLATFORM
 
-PART II - STANDALONE APP
+
+
+
+
+# PART II - STANDALONE APP
+
+
 At this stage we have generated hardware platform XSA
 
 * source VIVADO
-    source /tools/Xilinx/Vivado/2022.1/settings64.sh
+  `  source /tools/Xilinx/Vivado/2022.1/settings64.sh`
 
 * open project generated at previous step
+
+
+
+![](https://github.com/Cloud-Tomat/kv260-notes/blob/main/PART-II-Standalone-GPIO-Test-App/Vitis-Debug-Configuration.png)
+
+
+
+![](/home/nicolas/sandbox/kv260-notes/PART-II-Standalone-GPIO-Test-App/Vitis-Debug-Configuration.png)
 
 https://xilinx.github.io/kria-apps-docs/creating_applications/2021.1/build/html/docs/baremetal.html
 
